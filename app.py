@@ -131,6 +131,7 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+# BROKEN LOGIC HERE
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(1, 100)
@@ -144,6 +145,7 @@ if st.session_state.status != "playing":
         st.error("Game over. Start a new game to try again.")
     st.stop()
 
+# BROKEN LOGIC HERE
 if submit:
     st.session_state.attempts += 1
 
