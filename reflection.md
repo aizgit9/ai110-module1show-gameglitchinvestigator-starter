@@ -4,9 +4,11 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 ## 1. What was broken when you started?
 
-- What did the game look like the first time you ran it?
-- List at least two concrete bugs you noticed at the start  
-  (for example: "the hints were backwards").
+After I won the game once and clicked the new game button, a new secret number was generated. I expected the app to provide feedback for my guess once I hit submit, but the submit guess button didn't do anything anymore.
+
+The secret number was 98. I first entered 100, and the app correctly said "go lower." Then I tried 99, and the app said "go higher" when it should've still said "go lower."
+
+The secret number was 90. I entered 50, and the app said "go lower" when it should've said "go higher."
 
 **Bug Reproduction Log**
 
@@ -14,9 +16,9 @@ Document at least 3 bugs you found. Add rows as needed.
 
 | Input | Expected Behavior | Actual Behavior | Console Output / Error |
 |-------|-------------------|-----------------|------------------------|
-| | | | |
-| | | | |
-| | | | |
+| Secret: 98 Input 1: 100 Input 2: 99 | "Go lower" "Go lower" | "Go lower" "Go higher" | none |
+| Secret: 90 Input: 50 | "Go higher" | "Go lower" | none |
+| After correct guess and pressing "New Game." Input: Submit Guess | "Go higher" or "Go lower" | No output | none |
 
 ---
 
