@@ -28,10 +28,14 @@ Document at least 3 bugs you found. Add rows as needed.
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
-I used Claude Code. In the new game handler, Claude suggested to add two lines:
+I used Claude Code. 
+In the new game handler, Claude suggested to add two lines:
   st.session_state.status = "playing"
   st.session_state.history = []
-This was correct, I verified it by analyzing the issue on my own and identifying the issue to compare with the AI output. 
+This was correct, I verified it by analyzing the issue on my own, testing the code, and identifying the issue to compare with the AI output. 
+
+To be honest, the AI didn't make any mistakes as far as I could tell. I made sure to make all my prompts very specific and clear, and nothing unexpected or misleading was produced.
+
 ---
 
 ## 3. Debugging and testing your fixes
@@ -41,12 +45,18 @@ This was correct, I verified it by analyzing the issue on my own and identifying
   and what it showed you about your code.
 - Did AI help you design or understand any tests? How?
 
+I decided whether a bug was fixed by running my test suite and interacting with the streamlit app myself to check everything was working correctly.
+
+In the test_guess_too_high function, I ran the check_guess function with a guess of 60 and the secret as 50. I could tell the code worked correctly if "Too High" was returned.
+
+Yes, building the tests was a pretty basic task that was much more efficient for AI to handle. I prompted it to design minimal tests for each bug I encountered. This saved me a lot of time.
 ---
 
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 
+Every time a user interacts with a Streamlit app, the entire script reruns and all variables are reverted to their original values. The session state variable can be used to store values across reruns.
 ---
 
 ## 5. Looking ahead: your developer habits
@@ -55,3 +65,5 @@ This was correct, I verified it by analyzing the issue on my own and identifying
   - This could be a testing habit, a prompting strategy, or a way you used Git.
 - What is one thing you would do differently next time you work with AI on a coding task?
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+A couple habits I want to reuse are reviewing the code carefully on my own in addition to asking AI for help. Also, providing clear and specific prompts is vital for staying on track and preventing errors. I also need to build more robust testing functions for my future projects, as I usually neglect them. Testing is extremely important. I used to think AI generated code was unreliable, but in this project it worked extremely well and I didn't find any problems with it.
