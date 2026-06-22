@@ -1,6 +1,7 @@
 import random
 import streamlit as st
 
+#FIX: Removed the local get_range_for_difficulty definition and imported it from logic_utils.py instead.
 from logic_utils import (
     check_guess,
     get_range_for_difficulty,
@@ -76,6 +77,10 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+# FIX: Dead submit button bug. Previously this reset attempts/secret but left
+# status as "won"/"lost", so the guard below called st.stop() before any guess
+# was processed. Now we reset all per-game state via new_game_state(), which
+# restores status to "playing".
 if new_game:
     st.session_state.update(new_game_state(random.randint(1, 100)))
     st.success("New game started.")
@@ -88,6 +93,10 @@ if st.session_state.status != "playing":
         st.error("Game over. Start a new game to try again.")
     st.stop()
 
+# FIX: Removed the parity-based str() coercion that turned the secret into a
+# string on even-numbered attempts. That forced int-vs-str comparisons, which
+# made consecutive guesses give inconsistent hints. The secret is now always
+# passed to check_guess() as the stored int.
 if submit:
     st.session_state.attempts += 1
 

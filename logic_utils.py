@@ -1,3 +1,4 @@
+#FIX: Refactored get_range_for_difficulty from app.py into logic_utils.py; replaced the NotImplementedError stub with the real implementation.
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
     if difficulty == "Easy":
@@ -9,6 +10,8 @@ def get_range_for_difficulty(difficulty: str):
     return 1, 100
 
 
+# FIX: Refactored this function out of app.py into logic_utils.py (filled in
+# the stub) so the guess-parsing logic is importable and unit-testable.
 def parse_guess(raw: str):
     """
     Parse user input into an int guess.
@@ -32,6 +35,12 @@ def parse_guess(raw: str):
     return True, value, None
 
 
+# FIX: Refactored this function out of app.py into logic_utils.py (filled in
+# the stub) so the comparison logic is importable and unit-testable.
+# FIX: Inverted-hint bug. The hint messages were swapped -- a too-high guess
+# said "Go HIGHER" and a too-low guess said "Go LOWER". Corrected so "Too High"
+# -> "Go LOWER" and "Too Low" -> "Go HIGHER". Also removed the dead
+# `except TypeError` branch that only existed to handle a string-coerced secret.
 def check_guess(guess, secret):
     """
     Compare guess to secret and return (outcome, message).
@@ -47,6 +56,8 @@ def check_guess(guess, secret):
         return "Too Low", "📈 Go HIGHER!"
 
 
+# FIX: Refactored this function out of app.py into logic_utils.py (filled in
+# the stub) so the scoring logic is importable and unit-testable.
 def update_score(current_score: int, outcome: str, attempt_number: int):
     """Update score based on outcome and attempt number."""
     if outcome == "Win":
@@ -66,6 +77,11 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
     return current_score
 
 
+# FIX: New helper added to fix the "dead submit button" bug. The New Game
+# handler in app.py reset attempts/secret but never reset status, leaving it
+# at "won"/"lost" so the guard's st.stop() killed every guess. Centralizing the
+# reset here (including status -> "playing") guarantees the game is playable
+# again and makes the fix unit-testable.
 def new_game_state(secret: int):
     """
     Build the fresh session state for starting a new game.
