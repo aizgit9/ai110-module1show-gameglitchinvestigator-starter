@@ -26,8 +26,11 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 📝 Document Your Experience
 
 - [ ] Describe the game's purpose.
+The game was a basic guess the number type game. The user inputs numbers with a limited number of guesses to try to guess the secret number. The app tells the user if their number was too high or too low. If their number matches the secret, the user wins.
 - [ ] Detail which bugs you found.
+The logic behind telling the user if their number was too high or low was broken. And starting a new game caused the submit guess button to fail.
 - [ ] Explain what fixes you applied.
+I fixed the logic errors in the guess checking process and I fixed the session state error that prevented new games from functioning correctly.
 
 ## 📸 Demo Walkthrough
 
